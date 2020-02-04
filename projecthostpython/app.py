@@ -5,8 +5,7 @@ from werkzeug.utils import secure_filename
 import  sys
 from auto_tagify import AutoTagify
 import PyPDF2 
-import csv
-import pandas
+import sqlite3
 
 UPLOAD_FOLDER ='../projecthostpython/static'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'pptx','docx'])
@@ -14,11 +13,6 @@ lastFilename=''
 e_words=[]
 csvData = ['FileName','Auto_tag','Manual_tag']
 app = Flask(__name__)
-with open("file.csv",'w') as csvFile:
-    csvData = ['FileName','Auto_tag','Manual_tag']
-    writer = csv.DictWriter(csvFile,fieldnames=csvData)
-    writer.writeheader()
-csvFile.close()
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -104,13 +98,17 @@ def window():
         e_words = list(dict.fromkeys(t.tag_list()))  
         #print(e_words)
         file.close() 
+    
+    conn = sqlite3.connect('TAGS.db')
+    #c = conn.cursor()
+    # Insert a row of data
+    conn.execute('''INSERT INTO Tag (Filename,Auto_tag,Manual_tag,status) VALUES (?,?,?,?)''',(filenamenew, str(e_words),str([]), 1))
+    
+    # Save (commit) the changes
+    conn.commit()
+    conn.close()
+     
         
-        
-    with open("file.csv",'a') as csvFile:
-        writer = csv.DictWriter(csvFile,fieldnames=csvData)
-        writer.writerow({'FileName':filenamenew,'Auto_tag':e_words,'Manual_tag':[]})
-    csvFile.close()
-
     return render_template('window.html',F=filenamenew,L=e_words)
 
 
@@ -127,8 +125,14 @@ def manual_tag():
         text=[]
         text.append(request.form["manual_tag"])
         text=text[0].split()
-        text.insert(0,lastFilename)
         print(text)
+        
+        conn = sqlite3.connect('TAGS.db')
+        #c = conn.cursor()
+        conn.execute('''UPDATE Tag set Manual_tag = (?) where Filename = (?)''',(str(text),lastFilename))
+        conn.commit()
+        conn.close()
+        
     return redirect('/manual')
 
 if __name__ == "__main__":
