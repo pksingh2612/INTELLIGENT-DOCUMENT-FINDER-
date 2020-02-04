@@ -1,0 +1,14 @@
+{% extends "upload2.html" %}
+  {% block content %}
+    
+<div>
+    <ul class="menu"> 
+        {% for path in paths %} 
+            <li style="font-size: 10pt"> <a href="{{ url_for('window',type=path) }}">{{ path }}</a></li> 
+        {% endfor %}
+    </ul> 
+</div>
+
+  {% endblock %}
+
+``

@@ -1,0 +1,45 @@
+{% extends "upload2.html" %}
+  {% block content %}
+  <div >
+    <div>
+        <embed id="file" src="{{url_for('static', filename=F)}}" type="application/pdf" width="1000" height="500">
+    </div>
+    
+    <div>
+      <label for="inputLGEx">Automatic Tags</label>
+      {% for l in L %} 
+            <li id="auto_tag" style="font-size: 8pt">{{ l }}</li> 
+      {% endfor %}
+      
+      
+    </div>
+
+    <form action="/manual_tag" method="post">
+        <br/>
+        <!-- Large input -->
+        <div class="md-form form-lg">
+          <label for="inputLGEx">Manual Tags</label>
+          <br/>
+          <br/>
+          <input id="manual_tag" type="text" name="manual_tag"id="inputLGEx" class="form-control form-control-lg">
+          <li id="demo" style="font-size: 8pt"></li> 
+          <input type="submit" value="Submit" onclick="savemanaultag()">
+        </div>
+    </form>
+  
+  </div>
+
+  <script>
+    function savemanaultag() {
+       manual_tag=document.getElementById('manual_tag').value
+       var res = manual_tag.split(" ");
+      document.getElementById("demo").innerHTML = res;
+   }
+
+  </script>
+
+    
+    
+   
+{% endblock %}
+

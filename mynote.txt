@@ -1,0 +1,17 @@
+Aim: We have to make a website applicaion
+
+* Multiple document type support(.pptx,.pdf,.txt,.docx)
+* Support for data import from SQL databases and storage directories 
+
+As you see the image their are two option
+In the first option you have to select one document from you system at a time in either of format (.pptx,.pdf,.txt,.docx)
+
+or second option is to import sql-lite database into your web application.
+
+The above task can be done in Flask framework python.
+
+Your first step is to make interface in python flask as shown in figure.
+Your second step is to make to link storage directories that is multiple document type .
+Next step is to import sql-lite database in just one click on the interface.
+
+ 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>INTELLIGENT DOCUMENT FINDER</title>
+        
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/template.css') }}">
+        
+    </head>
+    <body>
+        <h2>Select import Directory</h2>
+	<p>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+			<ul class=flashes>
+			{% for message in messages %}
+			  <li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		  {% endif %}
+		{% endwith %}
+	</p>
+	<form method="post" action="/" enctype="multipart/form-data">
+		<dl>
+			<p>
+				<input type="file" name="files[]" multiple="true" autocomplete="off" required>
+				<input type="submit" value="Submit">
+			</p>
+		</dl>
+		
+	</form>
+
+	<form method="post" action="/convert" enctype="multipart/form-data">
+		<dl>
+			<p>
+				<input type="submit" value="Convert docx & pptx to pdf">
+			</p>
+		</dl>		
+	</form>
+
+        <div>
+        {% block content %}
+        {% endblock %}
+        </div>
+
+    </body>
+</html>
+
+	
