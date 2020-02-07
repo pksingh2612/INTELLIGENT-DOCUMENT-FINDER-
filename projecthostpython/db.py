@@ -6,7 +6,8 @@ c = conn.cursor()
 c.execute('''CREATE TABLE Tag
              (Filename TEXT NOT NULL, 
              Auto_tag TEXT, 
-             Manual_tag TEXT, 
+             Manual_tag TEXT,
+             Summary TEXT, 
              status INT);''')
 
 # # Insert a row of data

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>INTELLIGENT DOCUMENT FINDER</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+    <br>
+    <div class="row">
+        <div class="col-sm-2">
+            <button class="block"> Document Search </button>
+        </div>
+        <div class="col-sm-6">
+            <form action="/q_search1" method=post>
+                <input type="search" name="query" class="block2" name="a" placeholder="Search">
+                <input type="image" src="{{ url_for('static',filename='img/submit.gif') }}" alt="Submit">
+            </form>
+        </div>
+
+        <div class="col-sm-4">
+            <font size="5">Symmary</font>
+        </div>
+    </div>
+
+    <hr class="hr">
+
+    <table>
+        <tr>
+          <td>    
+              <img src="pdf.jpg" class="pdf" height="50"width="50">
+           </td>
+            <td>
+              <font color="blue" font size="4">&nbsp;&nbsp;&nbsp;Rebuilding U.S. deterrence to preserve peace through strength must be our Nation’s top priority.......</font>  <br>
+              &nbsp;&nbsp;&nbsp; The unprecedented era of peace that followed World War II revealed that the free world is safest when America is strongest....
+              <br>&nbsp;&nbsp;&nbsp;
+              <a href="www.google.com"><font color="green">www.usnews.com</font></a><br><br>
+              
+                 &nbsp;&nbsp;&nbsp;<font size="5">Tags</font>&nbsp;&nbsp;&nbsp;
+                
+                  <font size="5" class="bar2">USA</font>&nbsp;&nbsp;
+                  <font size="5" class="bar2">Security</font>&nbsp;&nbsp;
+                  <font size="5" class="bar2">President</font>&nbsp;&nbsp;
+                  
+
+            </td>
+            <td text align="center">
+                Hoban modelled the building
+                 on Leinster House<br> in Dublin,<br> a building.
+            </td>  
+        </tr>
+    </table><hr>
+    <table>
+          <tr>
+
+              <td>
+                  <img src="dc.jpg" class="dc" height="50" width="50">
+              </td>
+              <td>
+                <font color="blue" font size="4">&nbsp;&nbsp;
+                    The White House is the official residence and workplace of the president of the United States...
+                </font><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                The residence was designed by Irish-born architect James Hoban[2] in the neoclassical style.....<br>
+
+                &nbsp;&nbsp;&nbsp;&nbsp; <a href="www.google.com"><font color="green">www.forbes.house.gov</font></a><br><br>
+                &nbsp;&nbsp;&nbsp;<font size="5">Tags</font>&nbsp;&nbsp;&nbsp;
+                
+                  <font size="5" class="bar2">Flag Hosting</font>&nbsp;&nbsp;
+                  <font size="5" class="bar2">President House</font>&nbsp;&nbsp;
+                  
+              </td>
+          </tr>
+    </table>
+    <hr>
+    <table>
+          <tr>
+            <td>
+                <img src="ios.png" class="ios" height="50" width="50">
+            </td><td>
+                <font color="blue" font size="4">&nbsp;&nbsp;&nbsp;
+                Summary  
+                </font>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                The residence was designed by Irish-born architect James Hoban[2] in the neoclassical style.....
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="www.google.com"><font color="green">gergewbush-whitehouse.achives.gov</font></a><br><br> 
+                &nbsp; &nbsp;&nbsp;&nbsp;<font size="5">Tags</font>&nbsp;&nbsp;&nbsp;
+                
+                  <font size="5" class="bar2">Washington DC</font>&nbsp;&nbsp;
+                  <font size="5" class="bar2">CIA</font>&nbsp;&nbsp;     
+                  <font size="5" class="bar2">Maintenance</font>&nbsp;&nbsp;           
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

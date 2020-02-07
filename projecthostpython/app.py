@@ -6,6 +6,8 @@ import  sys
 from auto_tagify import AutoTagify
 import PyPDF2 
 import sqlite3
+import time
+from summary import generate_summary
 
 UPLOAD_FOLDER ='../projecthostpython/static'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'pptx','docx'])
@@ -53,14 +55,15 @@ def manualtag():
         li.append(path)    
     return render_template('manual.html', paths = li)
 
-
 @app.route('/window')
 def window():
     global lastFilename
     name,ext=os.path.splitext(request.args.get('type'))
     filenamenew=name+ext
     lastFilename=filenamenew
-    if ext==".pdf":        
+    status=1
+    
+    if ext==".pdf":
         # creating a pdf file object 
         pdfFileObj = open(UPLOAD_FOLDER+"/"+filenamenew, 'rb')    
         # creating a pdf reader object 
@@ -79,14 +82,13 @@ def window():
         #print(bundle)
         # closing the pdf file object 
         pdfFileObj.close()
-
+        
         #Auto tagging
         t = AutoTagify()
         t.text = bundle
         #print(t.tag_list())
         e_words = list(dict.fromkeys(t.tag_list()))  
         #print(e_words)
-
 
     else:
         file = open(UPLOAD_FOLDER+"/"+filenamenew,"r+") 
@@ -99,15 +101,17 @@ def window():
         #print(e_words)
         file.close() 
     
+    #Summarization
+    summary=generate_summary(UPLOAD_FOLDER+"/"+filenamenew,5)
+
     conn = sqlite3.connect('TAGS.db')
     #c = conn.cursor()
     # Insert a row of data
-    conn.execute('''INSERT INTO Tag (Filename,Auto_tag,Manual_tag,status) VALUES (?,?,?,?)''',(filenamenew, str(e_words),str([]), 1))
-    
+    conn.execute('''INSERT INTO Tag (Filename,Auto_tag,Manual_tag,Summary,status) VALUES (?,?,?,?,?)''',(filenamenew, str(e_words),str([]),str(summary),status))
+            
     # Save (commit) the changes
     conn.commit()
     conn.close()
-     
         
     return render_template('window.html',F=filenamenew,L=e_words)
 
@@ -131,9 +135,19 @@ def manual_tag():
         #c = conn.cursor()
         conn.execute('''UPDATE Tag set Manual_tag = (?) where Filename = (?)''',(str(text),lastFilename))
         conn.commit()
-        conn.close()
-        
+        conn.close()        
     return redirect('/manual')
+
+@app.route('/q_search')
+def query_serach():
+    return render_template('query_search.html')
+
+@app.route('/q_search1',methods=['POST'])
+def query_serach1():
+    if request.method=='POST':
+        print(request.form["query"])
+    return render_template('query_search.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
